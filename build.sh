@@ -87,25 +87,16 @@ BUILD_KERNEL() {
 INSTALL_MODULES() {
 	grep -q 'CONFIG_MODULES=y' build/.config || return 0
 	echo "Installing kernel modules to build/lib/modules..."
-	while ! make -C "$RDIR" O=build \
+	make -C "$RDIR" O=build \
 		INSTALL_MOD_PATH="." \
 		INSTALL_MOD_STRIP=1 \
 		modules_install
-do
-	exit 1
-done
-rm build/lib/modules/*/build build/lib/modules/*/source
-																																		    }
-
-
-																																		    if ! $CONTINUE; then
-																																			    CLEAN_BUILD
-																																			    SETUP_BUILD ||
-																																				    ABORT "Failed to set up build!"
-																																		    fi
-
-																																		    BUILD_KERNEL &&
-																																			    INSTALL_MODULES &&
-																																			    echo "Finished building $LOCALVERSION!"
+	rm build/lib/modules/*/build build/lib/modules/*/source
+}
+CLEAN_BUILD &&
+	SETUP_BUILD &&
+	BUILD_KERNEL &&
+	INSTALL_MODULES &&
+	echo "Finished building $LOCALVERSION!"
 
 
