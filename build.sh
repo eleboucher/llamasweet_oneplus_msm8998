@@ -13,9 +13,6 @@
 # root directory of OnePlus msm8996 git repo (default is this script's location)
 RDIR=$(pwd)
 
-[ "$VER" ] ||
-	# version number
-VER=$(cat "$RDIR/VERSION")
 
 # directory containing cross-compile arm64 toolchain
 TOOLCHAIN=$HOME/aarch64-linux-android-4.9-kernel
@@ -25,7 +22,7 @@ CPU_THREADS=$(grep -c "processor" /proc/cpuinfo)
 THREADS=$((CPU_THREADS + 1))
 
 export KBUILD_BUILD_USER=LlamaSweet
-export LOCALVERSION="LlamaSweet"
+export LOCALVERSION="LlamaSweet-${KERNELVERSION}"
 
 ############## SCARY NO-TOUCHY STUFF ###############
 
