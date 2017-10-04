@@ -56,7 +56,7 @@ while [ $# != 0 ]; do
 	shift
 done
 
-[ "$TARGET" ] || TARGET=lineage_cheeseburger
+[ "$TARGET" ] || TARGET=llamasweet
 
 DEFCONFIG=${TARGET}_defconfig
 
